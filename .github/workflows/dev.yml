@@ -1,4 +1,4 @@
-name: Development Workflow 3.8
+name: Run Tests and Push Image to Heroku Dev
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  run_pytest:
+  runtest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,13 +21,14 @@ jobs:
       - name: Test with pytest
         run: pytest -vv
 
-  deploy_heroku:
+
+  deploy-heroku:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "kwilliam-dev" #Must be unique in Heroku
-          heroku_email: "keith@webizly.com"
+          heroku_app_name: "eab4-dev-proj4" #Must be unique in Heroku
+          heroku_email: "eab4@njit.edu"
           usedocker: true
